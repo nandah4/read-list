@@ -51,9 +51,9 @@ function undoBooks(bookId) {
 }
 
 function removeBookFromData(bookId) {
-  const findIndex = data.findIndex((item) => item.id === bookId);
-  if (findIndex === -1) {
-    data.splice(findIndex, 1);
+  const findIndexItem = data.findIndex((item) => item.id === bookId);
+  if (findIndexItem !== -1) {
+    data.splice(findIndexItem, 1);
   }
   document.dispatchEvent(new Event(DATA_RENDER));
   saveDataToLocal();
@@ -63,7 +63,7 @@ function makeListBook(listBook) {
   const { id, title, author, date, isCompleted } = listBook;
 
   const uncompletedDiv = document.getElementById("uncompleted");
-  uncompletedDiv.classList.add("border");
+  const completedDiv = document.getElementById("completed");
 
   const card = document.createElement("div");
   card.classList.add("card");
@@ -94,6 +94,20 @@ function makeListBook(listBook) {
 
   card.append(textTitle, fieldAuthor, fieldYear, buttonDiv);
 
+  const totalIsCompleted = data.filter((item) => item.isCompleted);
+
+  if (totalIsCompleted.length > 1) {
+    uncompletedDiv.classList.remove("border");
+    uncompletedDiv.classList.remove("h-52");
+    completedDiv.classList.add("border");
+    completedDiv.classList.add("h-52");
+  } else {
+    uncompletedDiv.classList.add("border");
+    uncompletedDiv.classList.add("h-52");
+    completedDiv.classList.remove("border");
+    completedDiv.classList.remove("h-52");
+  }
+
   if (isCompleted) {
     buttonFirst.innerText = "Kembalikan Buku";
     buttonFirst.addEventListener("click", function () {
@@ -102,11 +116,16 @@ function makeListBook(listBook) {
 
     buttonSeccond.addEventListener("click", function () {
       removeBookFromData(id);
-      console.log
+      console.log("succes");
     });
   } else {
     buttonFirst.addEventListener("click", function () {
       moveBookToCompleted(id);
+    });
+
+    buttonSeccond.addEventListener("click", function () {
+      removeBookFromData(id);
+      console.log("succes");
     });
   }
 
