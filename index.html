@@ -59,6 +59,7 @@
                     type="text"
                     name="title"
                     id="title"
+                    maxlength="50"
                     required
                     placeholder="Enter the book title here"
                     class="border rounded-sm py-2 focus:outline-sky-400 mt-2 px-3 text-[14px]"
@@ -71,6 +72,7 @@
                     type="text"
                     name="author"
                     id="author"
+                    max="25"
                     required
                     placeholder="Enter the book author here"
                     class="border rounded-sm py-2 focus:outline-sky-400 mt-2 px-3 text-[14px]"
@@ -172,14 +174,22 @@
           <div class="mt-5" >
             <p class="text-lg font-medium">Belum Selesai Dibaca</p>
 
+            <div id="hiddenMessage" class="mt-2" hidden>
+              Tidak ada daftar buku.
+            </div>
+
             <div id="uncompleted"
               class=" mt-2 rounded-md p-5 overflow-auto grid grid-cols-2 gap-3"
             >
               </div>
           </div>  
 
-          <div class="mt-5" >
+          <div class="mt-5">
             <p class="text-lg font-medium">Sudah Selesai Dibaca</p>
+
+            <div id="hiddenMessageTrue" class="mt-2" hidden>
+              Tidak ada daftar buku.
+            </div>
 
             <div id="completed"
               class=" mt-2 rounded-md p-5 overflow-auto grid grid-cols-2 gap-3 "

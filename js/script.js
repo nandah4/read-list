@@ -94,19 +94,31 @@ function makeListBook(listBook) {
 
   card.append(textTitle, fieldAuthor, fieldYear, buttonDiv);
 
-  const totalIsCompleted = data.filter((item) => item.isCompleted);
+  const totalIsCompletedFalse = data.filter(item => item.isCompleted == false);
+  const totalIsCompletedTrue = data.filter(item => item.isCompleted == true);
+  const hiddenMessage = document.getElementById('hiddenMessage');
+  const hiddenMessageTrue = document.getElementById('hiddenMessageTrue');
 
-  if (totalIsCompleted.length > 1) {
-    uncompletedDiv.classList.remove("border");
-    uncompletedDiv.classList.remove("h-52");
-    completedDiv.classList.add("border");
-    completedDiv.classList.add("h-52");
-  } else {
+  if (totalIsCompletedFalse.length  > 0) {
     uncompletedDiv.classList.add("border");
     uncompletedDiv.classList.add("h-52");
+    hiddenMessage.setAttribute('hidden', true)
+  } else {
+    uncompletedDiv.classList.remove("border");
+    uncompletedDiv.classList.remove("h-52");  
+    hiddenMessage.removeAttribute('hidden')
+  }
+  if (totalIsCompletedTrue.length  > 0) {
+    completedDiv.classList.add("border");
+    completedDiv.classList.add("h-52");
+    hiddenMessageTrue.setAttribute('hidden', true)
+  } else {
     completedDiv.classList.remove("border");
     completedDiv.classList.remove("h-52");
+    hiddenMessageTrue.removeAttribute('hidden')
   }
+
+
 
   if (isCompleted) {
     buttonFirst.innerText = "Kembalikan Buku";
