@@ -29,11 +29,32 @@ function printObjectData(id, title, author, date, isCompleted) {
 function moveBookToCompleted(bookId) {
   const bookTarget = findBookById(bookId);
 
-  if (bookTarget !== null) {
+  if (bookTarget == null) {
     return;
   }
   bookTarget.isCompleted = true;
 
+  document.dispatchEvent(new Event(DATA_RENDER));
+  saveDataToLocal();
+}
+
+function undoBooks(bookId) {
+  const bookTarget = findBookById(bookId);
+
+  if (bookTarget == null) {
+    return;
+  }
+
+  bookTarget.isCompleted = false;
+  document.dispatchEvent(new Event(DATA_RENDER));
+  saveDataToLocal();
+}
+
+function removeBookFromData(bookId) {
+  const findIndex = data.findIndex((item) => item.id === bookId);
+  if (findIndex === -1) {
+    data.splice(findIndex, 1);
+  }
   document.dispatchEvent(new Event(DATA_RENDER));
   saveDataToLocal();
 }
@@ -74,9 +95,19 @@ function makeListBook(listBook) {
   card.append(textTitle, fieldAuthor, fieldYear, buttonDiv);
 
   if (isCompleted) {
+    buttonFirst.innerText = "Kembalikan Buku";
+    buttonFirst.addEventListener("click", function () {
+      undoBooks(id);
+    });
+
+    buttonSeccond.addEventListener("click", function () {
+      removeBookFromData(id);
+      console.log
+    });
   } else {
-    
-    
+    buttonFirst.addEventListener("click", function () {
+      moveBookToCompleted(id);
+    });
   }
 
   return card;
