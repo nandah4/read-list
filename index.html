@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookshelf App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .text-title {
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .text-author {
+        font-size: 13px;
+        margin: 4px 0;
+      }
+      .text-year {
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid grid-cols-2">
+      <div class=" border-green-400 mt-16">
+        <div class="max-w-lg mx-auto p-8 border rounded-md shadow-sm">
+          <div>
+            <h1 class="text-xl font-medium">Bookshelf App</h1>
+            <p class="text-[15px]">Find the book you want to search for.</p>
+            <div class="my-5 rounded-md">
+              <form id="form-data">
+                <div class="flex flex-col mb-5">
+                  <label for="title" class="text-[15px]">Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    required
+                    placeholder="Enter the book title here"
+                    class="border rounded-sm py-2 focus:outline-sky-400 mt-2 px-3 text-[14px]"
+                  />
+                </div>
+
+                <div class="flex flex-col mb-5">
+                  <label for="author" class="text-[15px]">Author</label>
+                  <input
+                    type="text"
+                    name="author"
+                    id="author"
+                    required
+                    placeholder="Enter the book author here"
+                    class="border rounded-sm py-2 focus:outline-sky-400 mt-2 px-3 text-[14px]"
+                  />
+                </div>
+
+                <div class="flex flex-col mb-3">
+                  <label for="year" class="text-[15px]">Year of release</label>
+                  <input
+                    type="number"
+                    name="year"
+                    id="year"
+                    min="0"
+                    step="0"
+                    required
+                    placeholder="Enter the year the book was released"
+                    class="border rounded-sm py-2 focus:outline-sky-400 mt-2 px-3 text-[14px]"
+                  />
+                </div>
+
+                <div class="mb-5">
+                  <label for="isCompleted" class="text-[15px]"
+                    >Have you finished reading?</label
+                  >
+                  <input
+                    type="checkbox"
+                    name="year"
+                    id="year"
+                    min="0"
+                    step="0"
+                    required
+                    placeholder="Enter the year the book was released"
+                    class="mx-2"
+                  />
+                </div>
+
+                <div class="group border rounded-lg bg-sky-400">
+                  <input
+                    type="submit"
+                    name="submit"
+                    id="submit"
+                    class="group-hover:cursor-pointer w-full py-2 text-white"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=" border-red-400 my-5">
+        <div class="">
+          <p class="text-lg text-center font-medium">Find book the below</p>
+          <div class="flex justify-center my-4 gap-x-2">
+            <input
+              type="text"
+              class="border rounded-md w-1/2 focus:outline-sky-400 py-1 px-3"
+            />
+            <button class="group px-7 border rounded-md bg-sky-400 text-white">
+              <input
+                type="submit"
+                value="Cari Buku"
+                class="group-hover:cursor-pointer"
+              />
+            </button>
+          </div>
+
+          <div class="">
+            <p class="text-lg font-medium">Hasil Pencarian Anda</p>
+            <div
+              class="border rounded-md p-3 overflow-auto h-44 grid grid-cols-2 gap-3"
+            >
+              <div class="border h-36 p-3 rounded-lg">
+                <p class="text-title">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ipsum, enim?
+                </p>
+                <div class="grid grid-cols-2 gap-x-3 mt-1">
+                  <div class="border p-1">
+                    <p class="text-author">Author:</p>
+                    <p class="text-author">Ananda Priya Yustira</p>
+                  </div>
+                  <div class="border">
+                    <p class="text-year">Tahun</p>
+                  </div>
+                </div>
+              </div>
+              <div class="border h-36 p-3 rounded-lg">
+                <p class="text-title">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ipsum, enim?
+                </p>
+              </div>
+              <div class="border h-36 p-3 rounded-lg">
+                <p class="text-title">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ipsum, enim?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border border-white">
+          <p class="text-lg font-medium">Buku sudah di baca</p>
+          <div
+            class="my-3 border overflow-auto h-48 p-3 grid grid-cols-2 gap-3"
+          >
+            <div class="border h-36 p-3 rounded-lg">
+              <p class="text-title">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+                enim?
+              </p>
+            </div>
+            <div class="border h-32">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+                enim?
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
