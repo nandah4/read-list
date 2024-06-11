@@ -6,16 +6,42 @@
     <title>Bookshelf App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      .card {
+        border: 1px solid rgb(223, 223, 223);
+        border-radius: 8px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
       .text-title {
         font-size: 15px;
         font-weight: 600;
       }
       .text-author {
         font-size: 14px;
+        margin-top: 10px;
       }
       .text-year {
         font-size: 13px;
+        margin-bottom: 10px;
       }
+      .button-div {
+        display: flex;
+        gap: 10px;
+      }
+      .button {
+        border: 1px solid skyblue;
+        width: 100%;
+        border-radius: 5px;
+        padding: 3px 0;
+        font-size: 14px;
+      }
+      .button:hover {
+        background: skyblue;
+        color: white;
+      }
+      
     </style>
   </head>
   <body>
@@ -71,12 +97,8 @@
                   >
                   <input
                     type="checkbox"
-                    name="year"
-                    id="year"
-                    min="0"
-                    step="0"
-                    required
-                    placeholder="Enter the year the book was released"
+                    name="isCompleted"
+                    id="isCompleted"    
                     class="mx-2"
                   />
                 </div>
@@ -111,25 +133,27 @@
             </button>
           </div>
 
-          <div class="">
+          <div class="" hidden>
             <p class="text-lg font-medium">Hasil Pencarian Anda</p>
             <div
               class="border mt-2 rounded-md p-5 overflow-auto h-52 grid grid-cols-2 gap-3"
             >
               <div class="border p-3 rounded-lg">
-                <p class="text-title">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ipsum, enim?
-                </p>
+                <div id="title-div">
+                  <p class="text-title">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Ipsum, enim?
+                  </p>
+                </div>
                 <div class="my-1">
                   <table>
                     <tbody class="text-author">
-                      <tr>
+                      <tr id="author">
                         <td>Author</td>
                         <td class="px-3">:</td>
                         <td>Ananda Priya Yustira</td>
                       </tr>
-                      <tr>
+                      <tr id="year">
                         <td>Tahun</td>
                         <td class="px-3">:</td>
                         <td>1997</td>
@@ -145,8 +169,30 @@
             </div>
           </div>     
 
+          <div class="mt-5" >
+            <p class="text-lg font-medium">Belum Selesai Dibaca</p>
+
+            <div id="uncompleted"
+              class=" mt-2 rounded-md p-5 overflow-auto grid grid-cols-2 gap-3 "
+            >
+
+              <!-- <div class="card">
+                <p class="text-title">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                <p class="text-author">Penulis :</p>
+                <p class="text-year">Tahun : 1997</p>
+
+                <div class="button-div">
+                  <button class="button">Sudah</button>
+                  <button class="button">Belum</button>
+                </div> -->
+              </div>
+            </div>
+          </div>  
+
+
+          
           <div class="mt-5">
-            <p class="text-lg font-medium"> Pen</p>
+            <p class="text-lg font-medium">Sudah Selesai Dibaca</p>
             <div
               class="border mt-2 rounded-md p-5 overflow-auto h-52 grid grid-cols-2 gap-3"
             >
@@ -181,5 +227,7 @@
 
       </div>
     </div>
+
+    <script src="./js/script.js"></script>
   </body>
 </html>
