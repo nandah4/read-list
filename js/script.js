@@ -26,11 +26,23 @@ function printObjectData(id, title, author, date, isCompleted) {
   };
 }
 
+function moveBookToCompleted(bookId) {
+  const bookTarget = findBookById(bookId);
+
+  if (bookTarget !== null) {
+    return;
+  }
+  bookTarget.isCompleted = true;
+
+  document.dispatchEvent(new Event(DATA_RENDER));
+  saveDataToLocal();
+}
+
 function makeListBook(listBook) {
   const { id, title, author, date, isCompleted } = listBook;
 
-  const uncompletedDiv = document.getElementById('uncompleted');
-  uncompletedDiv.classList.add('border')
+  const uncompletedDiv = document.getElementById("uncompleted");
+  uncompletedDiv.classList.add("border");
 
   const card = document.createElement("div");
   card.classList.add("card");
@@ -51,13 +63,21 @@ function makeListBook(listBook) {
   buttonDiv.classList.add("button-div");
   const buttonFirst = document.createElement("button");
   buttonFirst.classList.add("button");
+  buttonFirst.id = "buttonFirst";
   buttonFirst.innerText = "Sudah dibaca";
   const buttonSeccond = document.createElement("button");
   buttonSeccond.classList.add("button");
+  buttonSeccond.id = "buttonSecond";
   buttonSeccond.innerText = "Hapus Buku";
   buttonDiv.append(buttonFirst, buttonSeccond);
 
   card.append(textTitle, fieldAuthor, fieldYear, buttonDiv);
+
+  if (isCompleted) {
+  } else {
+    
+    
+  }
 
   return card;
 }
@@ -69,15 +89,15 @@ function saveDataToLocal() {
 }
 
 function getDataFromLocal() {
-  const dataFromLocal = localStorage.getItem(LOCAL_KEY)
+  const dataFromLocal = localStorage.getItem(LOCAL_KEY);
   let parseData = JSON.parse(dataFromLocal);
 
-  if(parseData !== null) {
-    for(const item of parseData) {
+  if (parseData !== null) {
+    for (const item of parseData) {
       data.push(item);
     }
   }
-  document.dispatchEvent(new Event(DATA_RENDER))
+  document.dispatchEvent(new Event(DATA_RENDER));
 }
 
 function addBook() {
@@ -97,12 +117,18 @@ function addBook() {
 
 document.addEventListener(DATA_RENDER, function () {
   const uncompleted = document.querySelector("#uncompleted");
-  
+  const completed = document.querySelector("#completed");
+
   uncompleted.innerHTML = "";
+  completed.innerHTML = "";
 
   for (const book of data) {
     const elemenValue = makeListBook(book);
-    uncompleted.append(elemenValue);
+    if (book.isCompleted) {
+      completed.append(elemenValue);
+    } else {
+      uncompleted.append(elemenValue);
+    }
   }
 });
 
