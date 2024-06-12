@@ -34,6 +34,15 @@
         border: 1px solid skyblue;
         width: 100%;
         border-radius: 5px;
+        padding: 4px 0;
+        font-size: 14px;
+      }
+      .button-done {
+        cursor: default;
+        background: skyblue;
+        color: white;
+        width: 100%;
+        border-radius: 5px;
         padding: 3px 0;
         font-size: 14px;
       }
@@ -45,6 +54,7 @@
     </style>
   </head>
   <body>
+
     <div class="grid grid-cols-2">
       <div class="border-green-400 mt-16">
         <div class="max-w-lg mx-auto p-8 border rounded-md shadow-sm">
@@ -141,13 +151,14 @@
           <div class="mt-5" >
             <p class="text-lg font-medium">Hasil Pencarian Anda</p>
 
-            <!-- <div id="hiddenMessage" class="mt-2" >
-              Tidak ada daftar buku.
-            </div> -->
+            <div id="hiddenMessageSearch" class="mt-2">
+              Tidak ada hasil pencarian.
+            </div>
 
             <div id="box-search"
               class=" mt-2 rounded-md p-5 overflow-auto grid grid-cols-2 gap-3"
             >
+            
             
               </div>
           </div>      

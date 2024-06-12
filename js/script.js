@@ -1,7 +1,13 @@
 const DATA_RENDER = "render-data-haha";
 const LOCAL_KEY = "save-local";
-const EVENT_SAVE = "savede-event";
 const data = [];
+
+function isBrowserSupportStorage() {
+  if( typeof (Storage) === 'undefined') {
+    alert('Your browser does not support Web Storage');
+  }
+  return true;
+}
 
 function genderateRandomID() {
   return +new Date();
@@ -128,7 +134,6 @@ function makeListBook(listBook) {
 
     buttonSeccond.addEventListener("click", function () {
       removeBookFromData(id);
-      console.log("succes");
     });
   } else {
     buttonFirst.addEventListener("click", function () {
@@ -137,7 +142,6 @@ function makeListBook(listBook) {
 
     buttonSeccond.addEventListener("click", function () {
       removeBookFromData(id);
-      console.log("succes");
     });
   }
 
@@ -145,9 +149,10 @@ function makeListBook(listBook) {
 }
 
 function saveDataToLocal() {
-  const parseData = JSON.stringify(data);
-  localStorage.setItem(LOCAL_KEY, parseData);
-  document.dispatchEvent(new Event(DATA_RENDER));
+  if(isBrowserSupportStorage()) {
+    const parseData = JSON.stringify(data);
+    localStorage.setItem(LOCAL_KEY, parseData);
+  }
 }
 
 function getDataFromLocal() {
@@ -172,14 +177,12 @@ function addBook() {
   const objectData = printObjectData(id, title, author, date, isCompleted);
 
   data.push(objectData);
-  console.log(objectData);
   document.dispatchEvent(new Event(DATA_RENDER));
   saveDataToLocal();
 }
 
-
 function showElemenBook(listBook) {
-  const { title, author, date} = listBook;
+  const { title, author, date, isCompleted } = listBook;
 
   const card = document.createElement("div");
   card.classList.add("card");
@@ -198,15 +201,18 @@ function showElemenBook(listBook) {
 
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("button-div");
-  const buttonFirst = document.createElement("button");
-  buttonFirst.classList.add("button");
-  buttonFirst.id = "buttonFirst";
-  buttonFirst.innerText = "Sudah dibaca";
-  const buttonSeccond = document.createElement("button");
-  buttonSeccond.classList.add("button");
-  buttonSeccond.id = "buttonSecond";
-  buttonSeccond.innerText = "Hapus Buku";
-  buttonDiv.append(buttonFirst, buttonSeccond);
+
+  if (isCompleted) {
+    const buttonFirst = document.createElement("button");
+    buttonFirst.classList.add("button-done");
+    buttonFirst.innerText = "Sudah dibaca";
+    buttonDiv.append(buttonFirst);
+  } else {
+    const buttonSeccond = document.createElement("button");
+    buttonSeccond.classList.add("button-done");
+    buttonSeccond.innerText = "Belum Selesai Dibaca";
+    buttonDiv.append(buttonSeccond);
+  }
 
   card.append(textTitle, fieldAuthor, fieldYear, buttonDiv);
   return card;
@@ -223,7 +229,6 @@ function showBook() {
     .getElementById("search")
     .value.trim()
     .toLowerCase();
-  // console.log(inputSearch)
 
   if (inputSearch === "") {
     document.dispatchEvent(new CustomEvent("render-search", { detail: [] }));
@@ -241,13 +246,18 @@ document.addEventListener("render-search", function (event) {
   const searchDiv = document.querySelector("#box-search");
   const searchResult = event.detail;
   searchDiv.innerHTML = "";
+  const hiddenMessage = document.getElementById('hiddenMessageSearch');
 
   if (searchResult.length === 0) {
-    const hiddenMessage = document.createElement("p");
-    hiddenMessage.innerText = "Tidak ada hasil pencarian";
-    searchDiv.append(hiddenMessage);
-    return;
+    searchDiv.classList.remove("border");
+    searchDiv.classList.remove("h-52");
+    hiddenMessage.removeAttribute('hidden')
+  } else {
+    hiddenMessage.setAttribute('hidden', true)
+    searchDiv.classList.add("border");
+    searchDiv.classList.add("h-52");
   }
+
 
   for (const item of searchResult) {
     const elemenValue = showElemenBook(item);
@@ -286,5 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
   });
 
-  getDataFromLocal();
+  if(isBrowserSupportStorage()) {
+    getDataFromLocal();   
+  }
 });
