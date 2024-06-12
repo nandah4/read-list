@@ -22,13 +22,13 @@ function findBookById(todoId) {
   return null;
 }
 
-function printObjectData(id, title, author, date, isCompleted) {
+function printObjectData(id, title, author, year, isComplete) {
   return {
     id,
     title,
     author,
-    date,
-    isCompleted,
+    year,
+    isComplete,
   };
 }
 
@@ -38,7 +38,7 @@ function moveBookToCompleted(bookId) {
   if (bookTarget == null) {
     return;
   }
-  bookTarget.isCompleted = true;
+  bookTarget.isComplete = true;
 
   document.dispatchEvent(new Event(DATA_RENDER));
   saveDataToLocal();
@@ -51,7 +51,7 @@ function undoBooks(bookId) {
     return;
   }
 
-  bookTarget.isCompleted = false;
+  bookTarget.isComplete = false;
   document.dispatchEvent(new Event(DATA_RENDER));
   saveDataToLocal();
 }
@@ -66,7 +66,7 @@ function removeBookFromData(bookId) {
 }
 
 function makeListBook(listBook) {
-  const { id, title, author, date, isCompleted } = listBook;
+  const { id, title, author, year, isComplete } = listBook;
 
   const uncompletedDiv = document.getElementById("uncompleted");
   const completedDiv = document.getElementById("completed");
@@ -84,7 +84,7 @@ function makeListBook(listBook) {
 
   const fieldYear = document.createElement("p");
   fieldYear.classList.add("text-year");
-  fieldYear.innerText = `Tahun : ${date}`;
+  fieldYear.innerText = `Tahun : ${year}`;
 
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("button-div");
@@ -101,9 +101,9 @@ function makeListBook(listBook) {
   card.append(textTitle, fieldAuthor, fieldYear, buttonDiv);
 
   const totalIsCompletedFalse = data.filter(
-    (item) => item.isCompleted == false
+    (item) => item.isComplete == false
   );
-  const totalIsCompletedTrue = data.filter((item) => item.isCompleted == true);
+  const totalIsCompletedTrue = data.filter((item) => item.isComplete == true);
   const hiddenMessage = document.getElementById("hiddenMessage");
   const hiddenMessageTrue = document.getElementById("hiddenMessageTrue");
 
@@ -126,7 +126,7 @@ function makeListBook(listBook) {
     hiddenMessageTrue.removeAttribute("hidden");
   }
 
-  if (isCompleted) {
+  if (isComplete) {
     buttonFirst.innerText = "Kembalikan Buku";
     buttonFirst.addEventListener("click", function () {
       undoBooks(id);
@@ -170,11 +170,11 @@ function getDataFromLocal() {
 function addBook() {
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
-  const date = document.getElementById("year").value;
-  const isCompleted = document.getElementById("isCompleted").checked;
+  const year = document.getElementById("year").value;
+  const isComplete = document.getElementById("isCompleted").checked;
 
   const id = genderateRandomID();
-  const objectData = printObjectData(id, title, author, date, isCompleted);
+  const objectData = printObjectData(id, title, author, year, isComplete);
 
   data.push(objectData);
   document.dispatchEvent(new Event(DATA_RENDER));
@@ -182,7 +182,7 @@ function addBook() {
 }
 
 function showElemenBook(listBook) {
-  const { title, author, date, isCompleted } = listBook;
+  const { title, author, year, isComplete } = listBook;
 
   const card = document.createElement("div");
   card.classList.add("card");
@@ -197,12 +197,12 @@ function showElemenBook(listBook) {
 
   const fieldYear = document.createElement("p");
   fieldYear.classList.add("text-year");
-  fieldYear.innerText = `Tahun : ${date}`;
+  fieldYear.innerText = `Tahun : ${year}`;
 
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("button-div");
 
-  if (isCompleted) {
+  if (isComplete) {
     const buttonFirst = document.createElement("button");
     buttonFirst.classList.add("button-done");
     buttonFirst.innerText = "Sudah dibaca";
@@ -274,7 +274,7 @@ document.addEventListener(DATA_RENDER, function () {
 
   for (const book of data) {
     const elemenValue = makeListBook(book);
-    if (book.isCompleted) {
+    if (book.isComplete) {
       completed.append(elemenValue);
     } else {
       uncompleted.append(elemenValue);
