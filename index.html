@@ -121,60 +121,41 @@
 
       <div class="border-red-400 h-screen overflow-auto py-5 pr-3">
           <p class="text-lg text-center font-medium">Find book the below</p>
-          <div class="flex justify-center my-4 gap-x-2">
-            <input
-              type="text"
-              class="border rounded-md w-1/2 focus:outline-sky-400 py-1 px-3"
-            />
-            <button class="group px-7 border rounded-md bg-sky-400 text-white">
+          <form id="search-data">
+            <div class="flex justify-center my-4 gap-x-2">
               <input
-                type="submit"
-                value="Cari Buku"
-                class="group-hover:cursor-pointer"
+                type="text"
+                id="search"
+                class="border rounded-md w-1/2 focus:outline-sky-400 py-1 px-3"
               />
-            </button>
-          </div>
-
-          <div class="" hidden>
-            <p class="text-lg font-medium">Hasil Pencarian Anda</p>
-            <div
-              class="border mt-2 rounded-md p-5 overflow-auto h-52 grid grid-cols-2 gap-3"
-            >
-              <div class="border p-3 rounded-lg">
-                <div id="title-div">
-                  <p class="text-title">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ipsum, enim?
-                  </p>
-                </div>
-                <div class="my-1">
-                  <table>
-                    <tbody class="text-author">
-                      <tr id="author">
-                        <td>Author</td>
-                        <td class="px-3">:</td>
-                        <td>Ananda Priya Yustira</td>
-                      </tr>
-                      <tr id="year">
-                        <td>Tahun</td>
-                        <td class="px-3">:</td>
-                        <td>1997</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="flex gap-x-3 mt-2">
-                  <input type="submit" id="sudahDibaca" value="Sudah Dibaca" class="w-full border p-1 text-sm rounded-md bg-sky-400 text-white cursor-pointer">
-                  <input type="submit" id="sudahDibaca" value="Belum Dibaca" class="w-full border border-sky-400 p-2 text-sm rounded-md cursor-pointer">
-                </div>
-              </div>
+              <button class="group px-7 border rounded-md bg-sky-400 text-white">
+                <input
+                  type="submit"
+                  value="Cari Buku"
+                  class="group-hover:cursor-pointer"
+                />
+              </button>
             </div>
-          </div>     
+          </form>
+
+          <div class="mt-5" >
+            <p class="text-lg font-medium">Hasil Pencarian Anda</p>
+
+            <!-- <div id="hiddenMessage" class="mt-2" >
+              Tidak ada daftar buku.
+            </div> -->
+
+            <div id="box-search"
+              class=" mt-2 rounded-md p-5 overflow-auto grid grid-cols-2 gap-3"
+            >
+            
+              </div>
+          </div>      
 
           <div class="mt-5" >
             <p class="text-lg font-medium">Belum Selesai Dibaca</p>
 
-            <div id="hiddenMessage" class="mt-2" hidden>
+            <div id="hiddenMessage" class="mt-2" >
               Tidak ada daftar buku.
             </div>
 
@@ -187,7 +168,7 @@
           <div class="mt-5">
             <p class="text-lg font-medium">Sudah Selesai Dibaca</p>
 
-            <div id="hiddenMessageTrue" class="mt-2" hidden>
+            <div id="hiddenMessageTrue" class="mt-2">
               Tidak ada daftar buku.
             </div>
 

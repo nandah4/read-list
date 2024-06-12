@@ -94,31 +94,31 @@ function makeListBook(listBook) {
 
   card.append(textTitle, fieldAuthor, fieldYear, buttonDiv);
 
-  const totalIsCompletedFalse = data.filter(item => item.isCompleted == false);
-  const totalIsCompletedTrue = data.filter(item => item.isCompleted == true);
-  const hiddenMessage = document.getElementById('hiddenMessage');
-  const hiddenMessageTrue = document.getElementById('hiddenMessageTrue');
+  const totalIsCompletedFalse = data.filter(
+    (item) => item.isCompleted == false
+  );
+  const totalIsCompletedTrue = data.filter((item) => item.isCompleted == true);
+  const hiddenMessage = document.getElementById("hiddenMessage");
+  const hiddenMessageTrue = document.getElementById("hiddenMessageTrue");
 
-  if (totalIsCompletedFalse.length  > 0) {
+  if (totalIsCompletedFalse.length > 0) {
     uncompletedDiv.classList.add("border");
     uncompletedDiv.classList.add("h-52");
-    hiddenMessage.setAttribute('hidden', true)
+    hiddenMessage.setAttribute("hidden", true);
   } else {
     uncompletedDiv.classList.remove("border");
-    uncompletedDiv.classList.remove("h-52");  
-    hiddenMessage.removeAttribute('hidden')
+    uncompletedDiv.classList.remove("h-52");
+    hiddenMessage.removeAttribute("hidden");
   }
-  if (totalIsCompletedTrue.length  > 0) {
+  if (totalIsCompletedTrue.length > 0) {
     completedDiv.classList.add("border");
     completedDiv.classList.add("h-52");
-    hiddenMessageTrue.setAttribute('hidden', true)
+    hiddenMessageTrue.setAttribute("hidden", true);
   } else {
     completedDiv.classList.remove("border");
     completedDiv.classList.remove("h-52");
-    hiddenMessageTrue.removeAttribute('hidden')
+    hiddenMessageTrue.removeAttribute("hidden");
   }
-
-
 
   if (isCompleted) {
     buttonFirst.innerText = "Kembalikan Buku";
@@ -177,6 +177,84 @@ function addBook() {
   saveDataToLocal();
 }
 
+
+function showElemenBook(listBook) {
+  const { title, author, date} = listBook;
+
+  const card = document.createElement("div");
+  card.classList.add("card");
+
+  const textTitle = document.createElement("p");
+  textTitle.classList.add("text-title");
+  textTitle.innerText = title;
+
+  const fieldAuthor = document.createElement("p");
+  fieldAuthor.classList.add("text-author");
+  fieldAuthor.innerText = `Author : ${author}`;
+
+  const fieldYear = document.createElement("p");
+  fieldYear.classList.add("text-year");
+  fieldYear.innerText = `Tahun : ${date}`;
+
+  const buttonDiv = document.createElement("div");
+  buttonDiv.classList.add("button-div");
+  const buttonFirst = document.createElement("button");
+  buttonFirst.classList.add("button");
+  buttonFirst.id = "buttonFirst";
+  buttonFirst.innerText = "Sudah dibaca";
+  const buttonSeccond = document.createElement("button");
+  buttonSeccond.classList.add("button");
+  buttonSeccond.id = "buttonSecond";
+  buttonSeccond.innerText = "Hapus Buku";
+  buttonDiv.append(buttonFirst, buttonSeccond);
+
+  card.append(textTitle, fieldAuthor, fieldYear, buttonDiv);
+  return card;
+}
+
+function findBookByTitle(title) {
+  return data.filter((item) =>
+    item.title.toLowerCase().includes(title.toLowerCase())
+  );
+}
+
+function showBook() {
+  const inputSearch = document
+    .getElementById("search")
+    .value.trim()
+    .toLowerCase();
+  // console.log(inputSearch)
+
+  if (inputSearch === "") {
+    document.dispatchEvent(new CustomEvent("render-search", { detail: [] }));
+    return null;
+  }
+
+  const searchResult = findBookByTitle(inputSearch);
+
+  document.dispatchEvent(
+    new CustomEvent("render-search", { detail: searchResult })
+  );
+}
+
+document.addEventListener("render-search", function (event) {
+  const searchDiv = document.querySelector("#box-search");
+  const searchResult = event.detail;
+  searchDiv.innerHTML = "";
+
+  if (searchResult.length === 0) {
+    const hiddenMessage = document.createElement("p");
+    hiddenMessage.innerText = "Tidak ada hasil pencarian";
+    searchDiv.append(hiddenMessage);
+    return;
+  }
+
+  for (const item of searchResult) {
+    const elemenValue = showElemenBook(item);
+    searchDiv.append(elemenValue);
+  }
+});
+
 document.addEventListener(DATA_RENDER, function () {
   const uncompleted = document.querySelector("#uncompleted");
   const completed = document.querySelector("#completed");
@@ -196,9 +274,15 @@ document.addEventListener(DATA_RENDER, function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const formData = document.querySelector("#form-data");
+  const searchData = document.querySelector("#search-data");
 
   formData.addEventListener("submit", function (event) {
     addBook();
+    event.preventDefault();
+  });
+
+  searchData.addEventListener("submit", function (event) {
+    showBook();
     event.preventDefault();
   });
 
