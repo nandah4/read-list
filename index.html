@@ -5,53 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bookshelf App</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      .card {
-        border: 1px solid rgb(223, 223, 223);
-        border-radius: 8px;
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .text-title {
-        font-size: 16px;
-        font-weight: 600;
-      }
-      .text-author {
-        font-size: 14px;
-        margin-top: 6px;
-      }
-      .text-year {
-        font-size: 13px;
-        margin-bottom: 14px;
-      }
-      .button-div {
-        display: flex;
-        gap: 10px;
-      }
-      .button {
-        border: 1px solid skyblue;
-        width: 100%;
-        border-radius: 5px;
-        padding: 4px 0;
-        font-size: 14px;
-      }
-      .button-done {
-        cursor: default;
-        background: skyblue;
-        color: white;
-        width: 100%;
-        border-radius: 5px;
-        padding: 3px 0;
-        font-size: 14px;
-      }
-      .button:hover {
-        background: skyblue;
-        color: white;
-      }
-      
-    </style>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
 
@@ -60,11 +14,11 @@
         <div class="max-w-lg mx-auto p-8 border rounded-md shadow-sm">
           <div>
             <h1 class="text-xl font-medium">Bookshelf App</h1>
-            <p class="text-[15px]">Find the book you want to search for.</p>
+            <p class="text-[15px]">Daftar Buku Anda, Catatan Perjalanan Literatur Anda!</p>
             <div class="my-5 rounded-md">
               <form id="form-data">
                 <div class="flex flex-col mb-5">
-                  <label for="title" class="text-[15px]">Title</label>
+                  <label for="title" class="text-[15px]">Judul Buku</label>
                   <input
                     type="text"
                     name="title"
@@ -77,12 +31,12 @@
                 </div>
 
                 <div class="flex flex-col mb-5">
-                  <label for="author" class="text-[15px]">Author</label>
+                  <label for="author" class="text-[15px]">Penulis</label>
                   <input
                     type="text"
                     name="author"
                     id="author"
-                    max="25"
+                    maxlength="30"
                     required
                     placeholder="Enter the book author here"
                     class="border rounded-sm py-2 focus:outline-sky-400 mt-2 px-3 text-[14px]"
@@ -90,7 +44,7 @@
                 </div>
 
                 <div class="flex flex-col mb-3">
-                  <label for="year" class="text-[15px]">Year of release</label>
+                  <label for="year" class="text-[15px]">Tahun Rilis</label>
                   <input
                     type="number"
                     name="year"
@@ -105,7 +59,7 @@
 
                 <div class="mb-5">
                   <label for="isCompleted" class="text-[15px]"
-                    >Have you finished reading?</label
+                    >Apakah anda sudah selesai membaca?</label
                   >
                   <input
                     type="checkbox"
@@ -130,7 +84,7 @@
       </div>
 
       <div class="border-red-400 h-screen overflow-auto py-5 pr-3">
-          <p class="text-lg text-center font-medium">Find book the below</p>
+          <p class="text-lg text-center font-medium">Temukan daftar buku anda di bawah ini!</p>
           <form id="search-data">
             <div class="flex justify-center my-4 gap-x-2">
               <input
@@ -150,7 +104,6 @@
 
           <div class="mt-5" >
             <p class="text-lg font-medium">Hasil Pencarian Anda</p>
-
             <div id="hiddenMessageSearch" class="mt-2">
               Tidak ada hasil pencarian.
             </div>
@@ -158,7 +111,6 @@
             <div id="box-search"
               class=" mt-2 rounded-md p-5 overflow-auto grid grid-cols-2 gap-3"
             >
-            
             
               </div>
           </div>      
@@ -188,9 +140,6 @@
             >
               </div>
           </div>  
-
-          
-
       </div>
     </div>
 

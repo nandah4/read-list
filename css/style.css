@@ -1,0 +1,44 @@
+.card {
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.text-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.text-author {
+  font-size: 14px;
+  margin-top: 6px;
+}
+.text-year {
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+.button-div {
+  display: flex;
+  gap: 10px;
+}
+.button {
+  border: 1px solid skyblue;
+  width: 100%;
+  border-radius: 5px;
+  padding: 4px 0;
+  font-size: 14px;
+}
+.button-done {
+  cursor: default;
+  background: skyblue;
+  color: white;
+  width: 100%;
+  border-radius: 5px;
+  padding: 3px 0;
+  font-size: 14px;
+}
+.button:hover {
+  background: skyblue;
+  color: white;
+}

@@ -80,7 +80,7 @@ function makeListBook(listBook) {
 
   const fieldAuthor = document.createElement("p");
   fieldAuthor.classList.add("text-author");
-  fieldAuthor.innerText = `Author : ${author}`;
+  fieldAuthor.innerText = `Penulis : ${author}`;
 
   const fieldYear = document.createElement("p");
   fieldYear.classList.add("text-year");
